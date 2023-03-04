@@ -1,0 +1,37 @@
+:root {
+  --c-primary-color: #ffffff;
+  --c-primary-color-hover: #cecece;
+  --c-primary-color-15: rgba(255, 255, 255, 0.15);
+  --c-background-dark-color: #000000;
+  --c-background-dark-color-15: rgba(0, 0, 0, 0.15);
+  --c-background-dark-color-75: rgba(0, 0, 0, 0.75);
+  --c-background-dark-color-90: rgba(0, 0, 0, 0.9);
+  --c-background-color: rgba(255, 255, 255, 0.1);
+  --c-background-color-10: rgba(255, 255, 255, 0.1);
+  --c-background-color-20: rgba(255, 255, 255, 0.2);
+  --c-background-color-80: rgba(255, 255, 255, 0.8);
+  --c-secondary-color: #9a9a9a;
+  --c-secondary-color-50: rgba(154, 154, 154, 0.5);
+  --c-background-secondary-color: rgba(10, 30, 31, 1);
+  --c-background-secondary-color-20: rgba(10, 30, 31, 0.2);
+  --c-background-secondary-color-40: rgba(10, 30, 31, 0.4);
+  --c-background-secondary-color-60: rgba(10, 30, 31, 0.6);
+  --c-background-secondary-color-80: rgba(10, 30, 31, 0.8);
+  --c-grey-color: #c2c2c2;
+  --c-dark-green-color: #29383c;
+  --c-accent-color: rgba(0, 199, 178, 1);
+  --c-accent-color-80: rgba(0, 199, 178, 0.8);
+  --c-accent-color-60: rgba(0, 199, 178, 0.6);
+  --c-accent-color-40: rgba(0, 199, 178, 0.8);
+  --c-accent-color-20: rgba(0, 199, 178, 0.6);
+  --c-third-color: #001113;
+  --c-accent-hover-color: #4dd8c9;
+
+  --c-error-color: rgba(249, 77, 87, 1);
+  --c-error-color-20: rgba(249, 77, 87, 0.2);
+  --c-error-color-30: rgba(249, 77, 87, 0.3);
+
+  --s-skeleton-background-size: 50%;
+  --b-default-border-size: 20px;
+  --b-expanded-border-size: 30px;
+}

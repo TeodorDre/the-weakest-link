@@ -1,5 +1,6 @@
-import { toPercent, toPixel } from '@/player/base/dom';
-import { t } from '@/player/code/localization/translate';
+import { AppRoute } from '@/routes';
+import { toPercent, toPixel } from '@/base/dom';
+import { translate } from '@/code/localization/translate';
 
 declare module '*.vue' {
   import { ComponentPublicInstance } from 'vue';
@@ -15,7 +16,8 @@ declare global {
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
-    $t: typeof t;
+    $t: typeof translate;
+    $AppRoute: typeof AppRoute;
     $toPixel: typeof toPixel;
     $toPercent: typeof toPercent;
     $isMobile: boolean;
