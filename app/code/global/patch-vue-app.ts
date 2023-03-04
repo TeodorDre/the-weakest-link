@@ -30,4 +30,8 @@ export default function patchVueApp(app: App<unknown>, props?: Partial<typeof gl
 
   app.use(pinia);
   app.use(router);
+
+  return {
+    router,
+  }
 }

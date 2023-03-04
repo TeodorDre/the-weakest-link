@@ -1,10 +1,23 @@
 import { defineStore } from 'pinia';
+import useState from '@/code/global/use-state';
+import { computed } from 'vue';
+import { isDefined } from '@/base/std';
 
-type PopupComponentName = '';
+const SESSION_STORE_NAME = 'session';
 
-const LAYOUT_STORE_NAME = 'layout';
+const useSessionStore = defineStore(SESSION_STORE_NAME, () => {
+  const [userName, setUserName] = useState('');
+  const [token, setToken] = useState<string | undefined>(undefined);
 
-const useLayoutStore = defineStore(LAYOUT_STORE_NAME, () => {
+  const isAuth = computed(() => isDefined(token.value));
+
+  return {
+    token,
+    isAuth,
+    userName,
+    setUserName,
+    setToken,
+  }
 });
 
-export default useLayoutStore;
+export default useSessionStore;

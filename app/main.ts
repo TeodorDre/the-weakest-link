@@ -2,9 +2,35 @@ import '@/assets/styles/main.scss';
 import { createApp } from 'vue';
 import App from './App.vue';
 import patchVueApp from '@/code/global/patch-vue-app';
+import { useLocalStorage } from '@/code/local-storage/use-local-storage';
+import { LocalStorageKey } from '@/code/local-storage/local-storage';
+import { ILocalSession } from '@/code/session/session';
+import useSessionStore from '@/code/store/session-store';
+import useMiddleware from '@/routes/middleware';
 
-const app = createApp(App);
+import ChooseRolePopupView from '@/components/popups/ChooseRolePopupView.vue';
 
-patchVueApp(app);
+function main() {
+  const { getLocalStorageValue } = useLocalStorage();
+  const app = createApp(App);
 
-app.mount('#app');
+  app.component('ChooseRolePopupView', ChooseRolePopupView);
+
+  const { router } = patchVueApp(app);
+  const sessionStore = useSessionStore();
+
+  useMiddleware(router);
+
+  const auth = getLocalStorageValue<ILocalSession>(LocalStorageKey.AuthToken);
+
+  if (auth) {
+    const { name, token } = auth.value;
+
+    sessionStore.setToken(token);
+    sessionStore.setUserName(name);
+  }
+
+  app.mount('#app');
+}
+
+main();

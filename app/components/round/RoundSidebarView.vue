@@ -23,7 +23,7 @@ const switchNextRound = () => {
   flex-direction: column;
   background-color: var(--c-primary-color-15);
   padding: 5px;
-  height: calc(100vh - 40px);
+  height: calc(100vh - var(--g-header-height));
   min-width: 100px;
 }
 </style>

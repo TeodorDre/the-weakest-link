@@ -1,0 +1,39 @@
+<template>
+  <section :class="$style.chooseRole">
+    <h1>Выберите роль</h1>
+    <select v-model="role">
+      <option value="player">Игрок</option>
+      <option value="watcher">Зритель</option>
+      <option value="host">Ведущий</option>
+    </select>
+  </section>
+</template>
+
+<script lang="ts" setup>
+import { ref, watch } from 'vue';
+import { useLocalStorage } from '@/code/local-storage/use-local-storage';
+import { LocalStorageKey } from '@/code/local-storage/local-storage';
+
+const { setLocalStorageValue } = useLocalStorage();
+const role = ref();
+
+watch(role, (val) => {
+  setLocalStorageValue(LocalStorageKey.Role, { value: val, expires: 60 * 60 * 24 })
+});
+</script>
+
+<style lang="scss" module>
+.chooseRole {
+  position: absolute;
+  top: 30%;
+  left: 45%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--c-dark-green-color);
+  gap: 10px;
+  width: 200px;
+  min-height: 250px;
+  border-radius: var(--b-default-border-size);
+}
+</style>
