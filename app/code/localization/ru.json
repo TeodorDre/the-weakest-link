@@ -1,3 +1,6 @@
 {
-
+  "nav.home": "Главная",
+  "nav.round": "Игра",
+  "round.notStarted": "Раунд не начан",
+  "round.switchNextRound": "Следующий раунд"
 }

@@ -13,6 +13,7 @@ import AppHeader from '@/components/AppHeader.vue';
 
 <style lang="scss" module>
 .layout {
-
+  display: flex;
+  flex-direction: column;
 }
 </style>

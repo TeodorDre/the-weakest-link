@@ -1,8 +1,11 @@
 <template>
   <header :class="$style.header">
-    <nav>
+    <nav :class="$style.nav">
       <router-link :class="$style.link" :to="{ name: $AppRoute.HomePage, }">
         {{ $t('nav.home') }}
+      </router-link>
+      <router-link :class="$style.link" :to="{ name: $AppRoute.RoundPage }">
+        {{ $t('nav.round') }}
       </router-link>
     </nav>
   </header>
@@ -15,6 +18,11 @@
 .header {
   padding: 10px;
   min-height: 40px;
+}
+
+.nav {
+  display: flex;
+  gap: 10px;
 }
 
 .link {
