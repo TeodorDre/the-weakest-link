@@ -1,0 +1,7 @@
+$programmable-dimension: 1280;
+$design-dimension: 1920;
+$aspect-ratio: calc($programmable-dimension / $design-dimension);
+
+@function adjustPx($px) {
+  @return $aspect-ratio * $px;
+}
