@@ -14,6 +14,7 @@
 <style lang="scss" module>
 .header {
   padding: 10px;
+  min-height: 40px;
 }
 
 .link {
