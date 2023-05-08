@@ -4,11 +4,16 @@
   "nav.profile": "Профиль",
   "common.login": "Ваш логин",
   "common.password": "Пароль",
+  "common.search": "Искать",
   "session.register": "Войти в аккаунт",
   "session.youUserName": "Ваше имя: {{ userName }}",
   "session.logout": "Выйти из аккаунта",
   "round.notStarted": "Раунд не начат",
   "round.switchNextRound": "Следующий раунд",
   "home.makeRegistration": "Войти или зарегистрируйтесь чтобы играть",
-  "": ""
+  "home.welcomeUser": "Добро пожаловать, {{ userName }}",
+  "home.selectAction": "Как будем играть?",
+  "home.createNewGame": "Создать новую игру",
+  "home.enterExistGame": "Войти в игру",
+  "game.searchGames": "Поиск комнаты"
 }

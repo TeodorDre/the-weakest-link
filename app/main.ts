@@ -9,12 +9,14 @@ import useSessionStore from '@/code/store/session-store';
 import useMiddleware from '@/routes/middleware';
 
 import ChooseRolePopupView from '@/components/popups/ChooseRolePopupView.vue';
+import EnterGamePopupView from '@/components/popups/EnterGamePopupView.vue';
 
 function main() {
   const { getLocalStorageValue } = useLocalStorage();
   const app = createApp(App);
 
   app.component('ChooseRolePopupView', ChooseRolePopupView);
+  app.component('EnterGamePopupView', EnterGamePopupView);
 
   const { router } = patchVueApp(app);
   const sessionStore = useSessionStore();

@@ -15,17 +15,17 @@ export const routes: RouteRecordRaw[] = [
   },
   {
     name: AppRoute.RoundPage,
-    path: '/round',
+    path: '/round/:id/',
     component: () => import('@/pages/RoundPage.vue'),
   },
   {
     name: AppRoute.LoginPage,
-    path: '/login',
+    path: '/login/',
     component: () => import('@/pages/LoginPage.vue'),
   },
   {
     name: AppRoute.ProfilePage,
-    path: '/profile',
+    path: '/profile/',
     component: () => import('@/pages/ProfilePage.vue')
   }
 ];

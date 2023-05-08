@@ -15,7 +15,7 @@ import { useLocalStorage } from '@/code/local-storage/use-local-storage';
 import { LocalStorageKey } from '@/code/local-storage/local-storage';
 
 const { setLocalStorageValue } = useLocalStorage();
-const role = ref();
+const role = ref('player');
 
 watch(role, (val) => {
   setLocalStorageValue(LocalStorageKey.Role, { value: val, expires: 60 * 60 * 24 })

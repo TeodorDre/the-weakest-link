@@ -22,10 +22,6 @@ const links = [
     text: translate('nav.home')
   },
   {
-    routeName: AppRoute.RoundPage,
-    text: translate('nav.round')
-  }
-  , {
     routeName: AppRoute.ProfilePage,
     text: translate('nav.profile')
   }

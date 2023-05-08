@@ -170,6 +170,12 @@ useEffect(() => {
   background: var(--secondary-color-gradient);
 }
 
+.text {
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
 .secondaryBlack {
   color: var(--c-third-color);
   background: 0;
