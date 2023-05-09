@@ -17,6 +17,10 @@ import { storeToRefs } from 'pinia';
 import useLayoutStore from '@/code/store/layout-store';
 
 const { popupName } = storeToRefs(useLayoutStore());
+
+import { gameLoopService } from '@/services';
+
+gameLoopService.init();
 </script>
 
 <style lang="scss" module>

@@ -5,16 +5,21 @@
         v-for="{routeName, text} in links"
         :key="routeName"
         :class="$style.link"
-        :to="{ name: routeName, }">
+        :to="{ name: routeName }">
         {{ text }}
       </router-link>
     </nav>
+    <app-slot-button>
+      <icon-volume mode="off" />
+    </app-slot-button>
   </header>
 </template>
 
 <script lang="ts" setup>
 import { AppRoute } from '@/routes';
 import { translate } from '@/code/localization/translate';
+import IconVolume from '@/components/icons/IconVolume.vue';
+import AppSlotButton from '@/components/ui/AppSlotButton.vue';
 
 const links = [
   {
@@ -30,8 +35,12 @@ const links = [
 
 <style lang="scss" module>
 .header {
+  display: flex;
+  justify-content: space-between;
   padding: 10px;
   min-height: var(--g-header-height);
+  background-color: var(--c-primary-color-15);
+  border-bottom: 1px solid var(--c-accent-color);
 }
 
 .nav {

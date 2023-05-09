@@ -8,8 +8,9 @@ import { formatTime } from '@/base/date';
 import { translate } from '@/code/localization/translate';
 import AppButton from '@/components/ui/AppButton.vue';
 import { roundService } from '@/services';
+import { GameRulesConstants } from '@/core/helpers/game';
 
-const FIRST_ROUND_TIME = 130;
+const FIRST_ROUND_TIME = GameRulesConstants.FirstRoundTimeSeconds;
 
 const isRunning = ref<boolean>();
 const roundTimeout = ref<number>(0);

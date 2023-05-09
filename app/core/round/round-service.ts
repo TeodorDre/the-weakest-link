@@ -1,5 +1,6 @@
 import { Disposable, IDisposable } from '@/base/lifecycle';
 import { EventEmitter } from '@/base/event-emitter';
+import { GameRulesConstants } from '@/core/helpers/game';
 
 interface EventMap {
   'next-round': number;
@@ -19,12 +20,12 @@ export class RoundService extends Disposable {
   }
 
   public switchNextRound(): void {
-    this.currentRound += 1;
-
     this.#emitter.emit('next-round', this.currentRound)
 
-    if (this.currentRound >= 8) {
+    if (this.currentRound >= GameRulesConstants.TotalRoundsCount) {
       this.currentRound = 0;
     }
+
+    this.currentRound += 1;
   }
 }

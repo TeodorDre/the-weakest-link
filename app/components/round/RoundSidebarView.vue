@@ -1,8 +1,8 @@
 <template>
-  <div :class="$style.sidebar">
+  <aside :class="$style.sidebar">
     <current-round-timer-view />
     <app-button :text="$t('round.switchNextRound')" @click="switchNextRound()"></app-button>
-  </div>
+  </aside>
 </template>
 
 <script lang="ts" setup>
@@ -22,8 +22,9 @@ const switchNextRound = () => {
   gap: 10px;
   flex-direction: column;
   background-color: var(--c-primary-color-15);
-  padding: 5px;
+  padding: 25px 5px 5px;
   height: calc(100vh - var(--g-header-height));
   min-width: 100px;
+  border-right: 1px solid var(--c-accent-color);
 }
 </style>

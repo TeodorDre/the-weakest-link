@@ -9,3 +9,9 @@ export interface IPlayer {
   id: string;
   role: PlayerRole;
 }
+
+export enum PlayerAction {
+  Pass = 1,
+  AnswerCorrect,
+  AnswerIncorrect,
+}

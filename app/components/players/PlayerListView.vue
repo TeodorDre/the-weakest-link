@@ -9,14 +9,15 @@
         <h3>
           {{ player.name }}
         </h3>
-        <p> {{ 1000 }} </p>
       </section>
     </li>
   </ul>
 </template>
 
 <script lang="ts" setup>
-import players from '@/mocks/players.json';
+import generateFakePlayers from '@/core/helpers/generate-fake-players';
+
+const players = generateFakePlayers();
 </script>
 
 <style lang="scss" module>
