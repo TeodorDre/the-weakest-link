@@ -5,7 +5,7 @@ import { defineConfig } from 'vitest/config';
 import { EnvironmentVariable } from './config/helpers/env';
 import viteConfigBase from './config/vite.config.base';
 
-const src = path.resolve(__dirname, 'src');
+const src = path.resolve(__dirname, 'app');
 
 const isSSR = Boolean(process.env.SSR);
 

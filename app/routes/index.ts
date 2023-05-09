@@ -5,9 +5,15 @@ export enum AppRoute {
   RoundPage = 'RoundPage',
   LoginPage = 'LoginPage',
   ProfilePage = 'ProfilePage',
+  CreateGamePage = 'CreateGamePage',
 }
 
 export const routes: RouteRecordRaw[] = [
+  {
+    name: AppRoute.CreateGamePage,
+    path: '/create-game/',
+    component: () => import('@/pages/CreateGamePage.vue'),
+  },
   {
     name: AppRoute.HomePage,
     path: '/',

@@ -1,6 +1,17 @@
 [
   {
-    "text": "Какой сейчас год?",
-    "answer": "2023"
+    "question_text": "Какой сейчас год?",
+    "question_exact_answer": "2023",
+    "questing_available_answers": ["2023", "2022"]
+  },
+  {
+    "question_text": "В каком году началась Великая отечественная война?",
+    "question_exact_answer": "1941",
+    "questing_available_answers": []
+  },
+  {
+    "question_text": "Какой сейчас год?",
+    "question_exact_answer": "2023",
+    "questing_available_answers": ["2023", "2022"]
   }
 ]

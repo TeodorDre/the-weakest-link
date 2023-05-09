@@ -18,7 +18,7 @@ export class RoundService extends Disposable {
     return this.#emitter.on(event, listener);
   }
 
-  public switchNextRound() {
+  public switchNextRound(): void {
     this.currentRound += 1;
 
     this.#emitter.emit('next-round', this.currentRound)

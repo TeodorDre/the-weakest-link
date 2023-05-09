@@ -6,6 +6,11 @@ import { AppRoute } from '@/routes/index';
 const authProtectedRoutes = [
   AppRoute.ProfilePage,
   AppRoute.RoundPage,
+  AppRoute.CreateGamePage,
+];
+
+const nonAuthProtectedRoutes = [
+  AppRoute.LoginPage,
 ];
 
 export default function useMiddleware(router: Router) {
@@ -23,5 +28,18 @@ export default function useMiddleware(router: Router) {
     return next();
   }
 
+  const isNonAuthMiddleware = (
+    to: RouteLocationNormalized,
+    _: RouteLocationNormalized,
+    next: NavigationGuardNext
+  ) => {
+    if (nonAuthProtectedRoutes.includes(to.name as AppRoute) && isAuth.value) {
+      return next({ name: AppRoute.HomePage })
+    }
+
+    return next();
+  }
+
+  router.beforeEach(isNonAuthMiddleware);
   router.beforeEach(isAuthMiddleware);
 }
