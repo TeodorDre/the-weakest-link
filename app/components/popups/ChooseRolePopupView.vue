@@ -32,7 +32,7 @@ watch(role, (val) => {
   padding: 10px;
   display: flex;
   flex-direction: column;
-  background-color: var(--c-dark-green-color);
+  background-color: var(--c-background-secondary-color-20);
   gap: 10px;
   width: 200px;
   min-height: 250px;

@@ -14,6 +14,7 @@ export namespace GameRulesConstants {
   export const FinalRoundQuestionsCount = 5; // each player - 5 questions.
 
   export const RoundBankValues = [
+    0,
     1000,
     2000,
     5000,
@@ -22,7 +23,7 @@ export namespace GameRulesConstants {
     30_000,
     40_000,
     50_000,
-  ]
+  ].reverse();
 
   /**
    * Rounds time

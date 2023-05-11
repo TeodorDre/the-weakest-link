@@ -15,9 +15,12 @@
 </template>
 
 <script lang="ts" setup>
-import generateFakePlayers from '@/core/helpers/generate-fake-players';
+import useGameStore from '@/code/store/game-store';
+import { storeToRefs } from 'pinia';
 
-const players = generateFakePlayers();
+const gameStore = useGameStore();
+
+const { players } = storeToRefs(gameStore);
 </script>
 
 <style lang="scss" module>

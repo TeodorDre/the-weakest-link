@@ -1,19 +1,11 @@
 <template>
   <aside :class="$style.sidebar">
-    <current-round-timer-view />
-    <app-button :text="$t('round.switchNextRound')" @click="switchNextRound()"></app-button>
+    <current-round-bank-progress />
   </aside>
 </template>
 
 <script lang="ts" setup>
-import CurrentRoundTimerView from '@/components/round/CurrentRoundTimerView.vue';
-import AppButton from '@/components/ui/AppButton.vue';
-
-import { roundService } from '@/services';
-
-const switchNextRound = () => {
-  roundService.switchNextRound();
-};
+import CurrentRoundBankProgress from '@/components/round/CurrentRoundBankProgress.vue';
 </script>
 
 <style lang="scss" module>
@@ -24,7 +16,7 @@ const switchNextRound = () => {
   background-color: var(--c-primary-color-15);
   padding: 25px 5px 5px;
   height: calc(100vh - var(--g-header-height));
-  min-width: 100px;
+  min-width: 150px;
   border-right: 1px solid var(--c-accent-color);
 }
 </style>

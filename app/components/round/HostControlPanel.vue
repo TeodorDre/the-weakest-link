@@ -1,12 +1,13 @@
 <template>
-  <section>
-
+  <section :class="$style.admin">
   </section>
 </template>
 
 <script lang="ts" setup>
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
+.admin {
 
+}
 </style>

@@ -10,19 +10,33 @@
 <script lang="ts" setup>
 import RoundSidebarView from '@/components/round/RoundSidebarView.vue';
 import PlayerListView from '@/components/players/PlayerListView.vue';
-import { onBeforeMount } from 'vue';
+import { onBeforeMount, onBeforeUnmount } from 'vue';
 import useLayoutStore from '@/code/store/layout-store';
 import { useLocalStorage } from '@/code/local-storage/use-local-storage';
 import { LocalStorageKey } from '@/code/local-storage/local-storage';
+import useGameStore from '@/code/store/game-store';
+import generateFakePlayers from '@/core/helpers/generate-fake-players';
 
 const layoutStore = useLayoutStore();
+const gameStore = useGameStore();
+
+const players = generateFakePlayers();
+
+for (const player of players) {
+  gameStore.addPlayer(player);
+}
+
 const { getLocalStorageValue } = useLocalStorage();
+
+onBeforeUnmount(() => {
+  gameStore.clearPlayers();
+})
 
 onBeforeMount(() => {
   const role = getLocalStorageValue(LocalStorageKey.Role);
 
   if (!role) {
-    layoutStore.setPopupName('ChooseRolePopupView')
+    return layoutStore.setPopupName('ChooseRolePopupView')
   }
 });
 </script>

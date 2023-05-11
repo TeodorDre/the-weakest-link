@@ -74,7 +74,7 @@ const getSearchBlockText = (block: ISearchResultBlock) => `${block.name} - ${blo
   position: absolute;
   padding: 20px;
   border-radius: var(--b-expanded-border-size);
-  background-color: var(--c-dark-green-color);
+  background-color: var(--c-background-secondary-color-80);
   top: 20px;
   bottom: 20px;
   left: 20px;
