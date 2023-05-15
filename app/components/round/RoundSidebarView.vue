@@ -15,7 +15,6 @@ import CurrentRoundBankProgress from '@/components/round/CurrentRoundBankProgres
   flex-direction: column;
   background-color: var(--c-primary-color-15);
   padding: 25px 5px 5px;
-  height: calc(100vh - var(--g-header-height));
   min-width: 150px;
   border-right: 1px solid var(--c-accent-color);
 }

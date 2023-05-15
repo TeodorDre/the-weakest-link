@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.layout">
     <app-header />
-    <main class="root">
+    <main :class="$style.root">
       <router-view :class="$style.routerView"></router-view>
     </main>
     <transition name="fade">
@@ -27,6 +27,9 @@ gameLoopService.init();
 .layout {
   display: flex;
   flex-direction: column;
+}
+
+.root {
 }
 
 .routerView {

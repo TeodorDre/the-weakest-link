@@ -1,5 +1,5 @@
 <template>
-  <root></root>
+  <root/>
 </template>
 
 <script lang="ts" setup>
