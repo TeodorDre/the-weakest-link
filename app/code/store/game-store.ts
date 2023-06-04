@@ -1,21 +1,22 @@
 import { defineStore } from 'pinia';
 import useState from '@/code/global/use-state';
-import { GameRulesConstants } from '@/core/helpers/game';
 import { IPlayer } from '@/core/player-types';
 import { ref } from 'vue';
 import { ApplicationError } from '@/code/errors/application-error';
+import { ICurrentGameProcessData } from '@/core/game/game-service';
 
 const GAME_STORE_NAME = 'game';
 
 const useGameStore = defineStore(GAME_STORE_NAME, () => {
+  const [currentGameProcessData, setCurrentGameProcessData] = useState<ICurrentGameProcessData | null>(null)
+
   // Сколько всего заработано в игре (за все раунды)
   const [currentTotalBankScore, setCurrentTotalBankScore] = useState(0)
   // Сколько в текущем раунде (берутся значения из GamesRulesConstants.
   const [currentRoundScore, setCurrentRoundScore] = useState(0)
-
   // Сколько положили денег в банк в текущем раунде
   const [currentRoundBankScore, setCurrentRoundBankScore] = useState(0);
-
+  // текущий игрок который отвечает на вопрос
   const [currentRoundPlayer, setCurrentRoundPlayer] = useState<IPlayer | null>(null);
 
   const players = ref<IPlayer[]>([]);
@@ -39,6 +40,8 @@ const useGameStore = defineStore(GAME_STORE_NAME, () => {
   }
 
   return {
+    currentGameProcessData,
+    setCurrentGameProcessData,
     clearPlayers,
     players,
     addPlayer,

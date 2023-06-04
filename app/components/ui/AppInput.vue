@@ -33,7 +33,7 @@ const emit = defineEmits(['update:input']);
   box-sizing: border-box;
   min-height: 40px;
   padding: 0 12px;
-  color: var(--c-background-secondary-color-20);
+  color: var(--c-background-secondary-color);
   background-color: var(--c-primary-color);
   border: 1px solid var(--c-primary-color-15);
   border-radius: 8px;

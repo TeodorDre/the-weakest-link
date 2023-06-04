@@ -15,12 +15,11 @@ import AppHeader from '@/components/AppHeader.vue';
 import AppPopupView from '@/components/AppPopupView.vue';
 import { storeToRefs } from 'pinia';
 import useLayoutStore from '@/code/store/layout-store';
+import { audioService } from '@/services';
 
 const { popupName } = storeToRefs(useLayoutStore());
 
-import { gameLoopService } from '@/services';
-
-gameLoopService.init();
+audioService.init();
 </script>
 
 <style lang="scss" module>

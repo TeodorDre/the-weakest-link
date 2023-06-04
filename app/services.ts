@@ -1,10 +1,7 @@
-import { RoundService } from '@/core/round/round-service';
-import GameLoopService from '@/core/game-loop/game-loop-service';
+import AudioService from '@/core/game/audio-service';
 
-const roundService = new RoundService();
-const gameLoopService = new GameLoopService();
+const audioService = new AudioService();
 
 export {
-  roundService,
-  gameLoopService,
+  audioService
 }

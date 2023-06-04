@@ -11,10 +11,9 @@
         :placeholder="$t('common.search')"
         v-model:input="searchText"
       />
-      <section :class="$style.results">
+      <section>
         <ul :class="$style.list">
           <li
-            :class="$style.item"
             v-for="result in fakeResults"
             :key="result">
             <app-search-result-block
@@ -74,7 +73,7 @@ const getSearchBlockText = (block: ISearchResultBlock) => `${block.name} - ${blo
   position: absolute;
   padding: 20px;
   border-radius: var(--b-expanded-border-size);
-  background-color: var(--c-background-secondary-color-80);
+  background-color: var(--c-accent-color);
   top: 20px;
   bottom: 20px;
   left: 20px;
@@ -91,10 +90,6 @@ const getSearchBlockText = (block: ISearchResultBlock) => `${block.name} - ${blo
   margin-top: 10px;
   grid-template-columns: 1fr;
   gap: 20px
-}
-
-.results {
-
 }
 
 .list {

@@ -1,5 +1,3 @@
-import { Disposable } from '@/base/lifecycle';
-
 import * as PIXI from 'pixi.js';
 import * as PIXISound from '@pixi/sound';
 
@@ -58,7 +56,7 @@ class GameSoundController {
   }
 }
 
-export default class GameLoopService {
+export default class AudioService {
   private readonly _core: PIXI.Application;
   private resources: Record<string, PIXI.LoaderResource> = {};
   public audioController: GameSoundController;

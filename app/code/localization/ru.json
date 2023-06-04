@@ -1,4 +1,7 @@
 {
+  "hostAction.pause": "Пауза",
+  "hostAction.play": "Играть",
+  "hostAction.setProcessStatus": "Выставить значение раунда",
   "nav.home": "Главная",
   "nav.round": "Игра",
   "nav.profile": "Профиль",

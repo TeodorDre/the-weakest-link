@@ -4,6 +4,7 @@
     <select v-model="role">
       <option value="player">Игрок</option>
       <option value="watcher">Зритель</option>
+      <option value="host">Ведущий </option>
     </select>
   </section>
 </template>
@@ -32,7 +33,7 @@ watch(role, (val) => {
   padding: 10px;
   display: flex;
   flex-direction: column;
-  background-color: var(--c-background-secondary-color-20);
+  background-color: var(--c-accent-color);
   gap: 10px;
   width: 200px;
   min-height: 250px;
