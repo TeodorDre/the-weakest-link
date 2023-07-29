@@ -1,5 +1,5 @@
 <template>
-  Ожидаем игроков
+  Ожидаем подключение игроков
 </template>
 
 <script setup lang="ts">

@@ -1,6 +1,7 @@
 <template>
   <button
     ref="buttonEl"
+    :disabled="disabled"
     :class="{
       [$style.button]: true,
       [$style.animated]: staticAnimation,
@@ -26,10 +27,12 @@ import { UnexpectedComponentStateError } from '@/code/errors/component-state-err
 import { toPixel } from '@/base/dom';
 
 const props = withDefaults(defineProps<{
+  disabled?: boolean;
   staticAnimation?: boolean;
   text: string,
   variation?: 'primary' | 'secondary' | 'secondary-black'
 }>(), {
+  disabled: false,
   staticAnimation: false,
   variation: 'primary',
 });

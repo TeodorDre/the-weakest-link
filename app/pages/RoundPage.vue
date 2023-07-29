@@ -2,10 +2,10 @@
   <div :class="$style.round">
     <round-sidebar-view />
     <div :class="$style.roundMain">
-      <player-list-view></player-list-view>
-      <div>
+      <div :class="$style.screen">
         <component :is="currentScreenComponentName" />
       </div>
+      <player-list-view></player-list-view>
     </div>
     <player-actions-sidebar-view />
   </div>
@@ -54,10 +54,15 @@ onBeforeMount(() => {
   gap: 10px;
 }
 
+.screen {
+
+}
+
 .roundMain {
   display: flex;
   flex-grow: 1;
+  gap: 20px;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 </style>

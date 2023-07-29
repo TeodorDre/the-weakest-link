@@ -32,9 +32,6 @@ function register() {
     return;
   }
 
-  console.log(login.value);
-  console.log(password.value);
-
   const token = nanoid(5);
 
   setLocalStorageValue(LocalStorageKey.AuthToken, {

@@ -1,5 +1,11 @@
 <template>
-  <app-button :class="$style.timer" :text="displayedTimer" static-animation />
+  <app-button
+    :class="$style.timer"
+    :text="displayedTimer"
+    :disabled="isButtonDisabled"
+    static-animation
+    @click="onButtonClick()"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -8,12 +14,31 @@ import { formatTime } from '@/base/date';
 import { translate } from '@/code/localization/translate';
 import AppButton from '@/components/ui/AppButton.vue';
 import { GameRulesConstants } from '@/core/helpers/game';
+import { storeToRefs } from 'pinia';
+import useGameStore from '@/code/store/game-store';
 
 const FIRST_ROUND_TIME = GameRulesConstants.FirstRoundTimeSeconds;
 
-const isRunning = ref<boolean>();
-const roundTimeout = ref<number>(0);
+const isAllPlayersConnected = ref(false);
+
+const gameStore = useGameStore();
+
+const { gameStatus } = storeToRefs(gameStore);
+const isRunning = ref(false);
+
+const roundTimeout = ref(0);
 let timeoutId: number | undefined;
+
+const onButtonClick = () => {
+};
+
+const isButtonDisabled = computed(() => {
+  if (gameStatus.value === 'waiting-players') {
+    return true;
+  }
+
+  return false;
+});
 
 const roundTick = () => {
   timeoutId = window.setTimeout(() => {
@@ -35,11 +60,15 @@ const runRound = (offsetRound: number) => {
 };
 
 const displayedTimer = computed(() => {
-  if (!isRunning.value) {
-    return translate('round.notStarted');
+  if (gameStatus.value === 'waiting-players') {
+    return translate('round.waitingPlayers')
   }
 
-  return formatTime(roundTimeout.value);
+  if (gameStatus.value === 'host-question' || gameStatus.value === 'player-answer') {
+    return formatTime(roundTimeout.value);
+  }
+
+  return translate('round.notStarted');
 });
 </script>
 

@@ -99,7 +99,6 @@ export default class AudioService {
 
     return new Promise<void>((resolve) => {
       this.core.loader.load(async (_, resources) => {
-        console.log(resources);
         // Ок, загрузились - теперь нас ничто не остановит чтобы начать рисовать!
         this.doInit(resources);
         resolve();

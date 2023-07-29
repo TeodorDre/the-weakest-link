@@ -29,12 +29,14 @@ const getComponentNameByGameProcess = (data: ICurrentGameProcessData): ScreenRou
 };
 
 const useGameStore = defineStore(GAME_STORE_NAME, () => {
-  const [currentGameProcessData, setCurrentGameProcessData] = useState<ICurrentGameProcessData>({
+  const [gameState, setGameState] = useState<ICurrentGameProcessData>({
     status: 'waiting-players',
     players: [],
   })
 
-  const currentScreenComponentName = computed(() => getComponentNameByGameProcess(currentGameProcessData.value));
+  const gameStatus = computed(() => gameState.value.status);
+
+  const currentScreenComponentName = computed(() => getComponentNameByGameProcess(gameState.value));
 
   // Сколько всего заработано в игре (за все раунды)
   const [currentTotalBankScore, setCurrentTotalBankScore] = useState(0)
@@ -66,9 +68,10 @@ const useGameStore = defineStore(GAME_STORE_NAME, () => {
   }
 
   return {
+    gameStatus,
     currentScreenComponentName,
-    currentGameProcessData,
-    setCurrentGameProcessData,
+    gameState,
+    setGameState,
     clearPlayers,
     players,
     addPlayer,

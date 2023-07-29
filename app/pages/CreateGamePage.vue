@@ -51,7 +51,6 @@ const playersCount = ref('');
 const onFileChange = async (event: any) => {
   try {
     const result = await parseJsonFile(event.target.files[0]);
-    console.log(result);
   } catch (e) {
     console.error(e);
   }

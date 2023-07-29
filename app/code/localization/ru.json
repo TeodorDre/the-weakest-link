@@ -1,4 +1,7 @@
 {
+  "round.waitingPlayers": "Ждем игроков",
+  "round.notStarted": "Раунд не начат",
+  "round.startRound": "Начать игру",
   "hostAction.pause": "Пауза",
   "hostAction.play": "Играть",
   "hostAction.setProcessStatus": "Выставить значение раунда",
@@ -11,7 +14,6 @@
   "session.register": "Войти в аккаунт",
   "session.youUserName": "Ваше имя: {{ userName }}",
   "session.logout": "Выйти из аккаунта",
-  "round.notStarted": "Раунд не начат",
   "createGamePage.title": "Создать новое лобби",
   "createGamePage.lobbyName": "Укажите название для лобби",
   "createGamePage.playersCount": "Сколько игроков будет учавствовать?",
