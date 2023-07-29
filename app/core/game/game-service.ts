@@ -1,5 +1,6 @@
 import { Disposable } from '@/base/lifecycle';
-import { IPlayer } from '@/core/player-types';
+import useGameStore from '@/code/store/game-store';
+import { EventEmitter } from '@/base/event-emitter';
 
 export type CurrentGameStatus =
   'waiting-players'
@@ -22,11 +23,23 @@ export type ScreenRoundComponentName =
 
 export interface ICurrentGameProcessData {
   status: CurrentGameStatus;
-  players: IPlayer[];
+}
+
+interface GameEventMap {
+  'pause': void;
+  'resume': void;
 }
 
 export class GameService extends Disposable {
+  public readonly emitter: EventEmitter<GameEventMap > = new EventEmitter<GameEventMap>();
+
   constructor() {
     super();
+
+    this.registerListeners();
+  }
+
+  private registerListeners() {
+    const gameStore = useGameStore();
   }
 }

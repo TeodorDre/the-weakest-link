@@ -7,9 +7,7 @@ export default function useGameRoomActions() {
   const router = useRouter();
 
   const createRoom = () => {
-    router.push({
-      name: AppRoute.CreateGamePage,
-    })
+    router.push({ name: AppRoute.CreateGamePage })
   };
 
   const enterRoom = () => {

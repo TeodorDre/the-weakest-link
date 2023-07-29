@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { formatTime } from '@/base/date';
 import { translate } from '@/code/localization/translate';
 import AppButton from '@/components/ui/AppButton.vue';
@@ -18,8 +18,6 @@ import { storeToRefs } from 'pinia';
 import useGameStore from '@/code/store/game-store';
 
 const FIRST_ROUND_TIME = GameRulesConstants.FirstRoundTimeSeconds;
-
-const isAllPlayersConnected = ref(false);
 
 const gameStore = useGameStore();
 
@@ -30,6 +28,9 @@ const roundTimeout = ref(0);
 let timeoutId: number | undefined;
 
 const onButtonClick = () => {
+  gameStore.setGameState({
+    status: 'host-question',
+  });
 };
 
 const isButtonDisabled = computed(() => {
@@ -38,6 +39,14 @@ const isButtonDisabled = computed(() => {
   }
 
   return false;
+});
+
+onMounted(() => {
+  window.setTimeout(() => {
+    gameStore.setGameState({
+      status: 'players-representation'
+    });
+  }, 5000);
 });
 
 const roundTick = () => {

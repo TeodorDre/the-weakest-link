@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import ProfileInformationView from '@/components/session/ProfileInformationView.vue';
+import ProfileInformationView from '@/components/ProfileInformationView.vue';
 </script>
 
 <style lang="scss" module>

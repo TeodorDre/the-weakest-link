@@ -15,6 +15,7 @@ import ScreenPlayersRepresentation from '@/components/screens/ScreenPlayersRepre
 import ScreenQuestionsRound from '@/components/screens/ScreenQuestionsRound.vue';
 import ScreenVotingPlayersBan from '@/components/screens/ScreenVotingPlayersBan.vue';
 import ScreenWaitingPlayers from '@/components/screens/ScreenWaitingPlayers.vue';
+import RoundPausePopup from '@/components/popups/RoundPausePopup.vue';
 
 function main() {
   const { getLocalStorageValue } = useLocalStorage();
@@ -28,6 +29,7 @@ function main() {
 
   app.component('ChooseRolePopupView', ChooseRolePopupView);
   app.component('EnterGamePopupView', EnterGamePopupView);
+  app.component('RoundPausePopup', RoundPausePopup);
 
   const { router } = patchVueApp(app);
   const sessionStore = useSessionStore();

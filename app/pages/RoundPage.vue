@@ -1,6 +1,7 @@
 <template>
   <div :class="$style.round">
     <round-sidebar-view />
+    <admin-control-panel />
     <div :class="$style.roundMain">
       <div :class="$style.screen">
         <component :is="currentScreenComponentName" />
@@ -14,44 +15,36 @@
 <script lang="ts" setup>
 import RoundSidebarView from '@/components/round/RoundSidebarView.vue';
 import PlayerListView from '@/components/players/PlayerListView.vue';
-import { onBeforeMount, onBeforeUnmount } from 'vue';
-import useLayoutStore from '@/code/store/layout-store';
-import { useLocalStorage } from '@/code/local-storage/use-local-storage';
-import { LocalStorageKey } from '@/code/local-storage/local-storage';
 import useGameStore from '@/code/store/game-store';
-import generateFakePlayers from '@/core/helpers/generate-fake-players';
 import PlayerActionsSidebarView from '@/components/round/PlayerActionsSidebarView.vue';
 import { storeToRefs } from 'pinia';
+import { GameService } from '@/core/game/game-service';
+import { provide } from 'vue';
+import useLayoutStore from '@/code/store/layout-store';
+import AdminControlPanel from '@/components/AdminControlPanel.vue';
 
-const layoutStore = useLayoutStore();
 const gameStore = useGameStore();
+const layoutStore = useLayoutStore();
 
 const { currentScreenComponentName } = storeToRefs(gameStore);
-const players = generateFakePlayers();
+const gameService = new GameService();
 
-for (const player of players) {
-  gameStore.addPlayer(player);
-}
-
-const { getLocalStorageValue } = useLocalStorage();
-
-onBeforeUnmount(() => {
-  gameStore.clearPlayers();
-})
-
-onBeforeMount(() => {
-  const role = getLocalStorageValue(LocalStorageKey.Role);
-
-  if (!role) {
-    return layoutStore.setPopupName('ChooseRolePopupView')
-  }
+gameService.emitter.on('pause', () => {
+  layoutStore.setPopupName('RoundPausePopup');
 });
+
+gameService.emitter.on('resume', () => {
+  layoutStore.setPopupName(null);
+});
+
+provide('gameService', gameService);
 </script>
 
 <style lang="scss" module>
 .round {
   display: flex;
   gap: 10px;
+  position: relative;
 }
 
 .screen {

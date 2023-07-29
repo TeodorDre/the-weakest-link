@@ -4,7 +4,6 @@ import { IPlayer } from '@/core/player-types';
 import { computed, ref } from 'vue';
 import { ApplicationError } from '@/code/errors/application-error';
 import { ICurrentGameProcessData, ScreenRoundComponentName } from '@/core/game/game-service';
-import { UnexpectedComponentStateError } from '@/code/errors/component-state-error';
 
 const GAME_STORE_NAME = 'game';
 
@@ -23,18 +22,17 @@ const getComponentNameByGameProcess = (data: ICurrentGameProcessData): ScreenRou
     case 'host-question':
     case 'player-answer':
       return 'ScreenQuestionsRound'
-    default:
-      throw new UnexpectedComponentStateError('status')
   }
 };
 
 const useGameStore = defineStore(GAME_STORE_NAME, () => {
   const [gameState, setGameState] = useState<ICurrentGameProcessData>({
     status: 'waiting-players',
-    players: [],
-  })
+  });
 
   const gameStatus = computed(() => gameState.value.status);
+
+  const isPaused = computed(() => gameState.value.status === 'paused');
 
   const currentScreenComponentName = computed(() => getComponentNameByGameProcess(gameState.value));
 
@@ -68,6 +66,7 @@ const useGameStore = defineStore(GAME_STORE_NAME, () => {
   }
 
   return {
+    isPaused,
     gameStatus,
     currentScreenComponentName,
     gameState,

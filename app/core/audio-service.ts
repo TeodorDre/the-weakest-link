@@ -18,6 +18,19 @@ import finalRoundEnd from '@/assets/audio/final_round_end.mp3';
 
 import playerWonBackground from '@/assets/audio/player_won_background.mp3';
 
+type GameAudioType =
+  'mainLoopBackground' |
+  'firstRoundStart' |
+  'roundBackground' |
+  'endRoundShort' |
+  'playersVotingBackground' |
+  'playerKickedBackground' |
+  'preFinalRoundBackground' |
+  'finalRoundStart' |
+  'finalRoundPlayersBackground' |
+  'finalRoundEnd' |
+  'playerWonBackground' | 'playersVotedShort'
+
 class GameSoundController {
   public mainLoopBackground: PIXISound.Sound;
   public firstRoundStart: PIXISound.Sound;
@@ -70,6 +83,15 @@ export default class AudioService {
 
   public get core() {
     return this._core;
+  }
+
+  public play(type: GameAudioType, stopCurrent = true) {
+    if (this.currentAudio && stopCurrent) {
+      this.currentAudio.stop();
+    }
+
+    this.currentAudio = this.audioController[type];
+    this.currentAudio.play({ loop: false });
   }
 
   public async init() {

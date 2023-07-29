@@ -7,9 +7,9 @@
 
 <script lang="ts" setup>
 import useSessionStore from '@/code/store/session-store';
-import RegistrationUserBlockView from '@/components/session/RegistrationUserBlockView.vue';
+import RegistrationUserBlockView from '@/components/RegistrationUserBlockView.vue';
 import { storeToRefs } from 'pinia';
-import UserActionBlockView from '@/components/home/UserActionBlockView.vue';
+import UserActionBlockView from '@/components/UserActionBlockView.vue';
 
 const { isAuth } = storeToRefs(useSessionStore());
 </script>

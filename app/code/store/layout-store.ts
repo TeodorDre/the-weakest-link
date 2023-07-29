@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import useState from '@/code/global/use-state';
 
-type PopupComponentName = 'ChooseRolePopupView' | 'EnterGamePopupView';
+type PopupComponentName = 'ChooseRolePopupView' | 'EnterGamePopupView' | 'RoundPausePopup';
 
 const LAYOUT_STORE_NAME = 'layout';
 
