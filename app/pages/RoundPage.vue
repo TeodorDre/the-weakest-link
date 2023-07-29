@@ -3,6 +3,9 @@
     <round-sidebar-view />
     <div :class="$style.roundMain">
       <player-list-view></player-list-view>
+      <div>
+        <component :is="currentScreenComponentName" />
+      </div>
     </div>
     <player-actions-sidebar-view />
   </div>
@@ -17,12 +20,13 @@ import { useLocalStorage } from '@/code/local-storage/use-local-storage';
 import { LocalStorageKey } from '@/code/local-storage/local-storage';
 import useGameStore from '@/code/store/game-store';
 import generateFakePlayers from '@/core/helpers/generate-fake-players';
-import CurrentRoundTimerView from '@/components/round/CurrentRoundTimerView.vue';
 import PlayerActionsSidebarView from '@/components/round/PlayerActionsSidebarView.vue';
+import { storeToRefs } from 'pinia';
 
 const layoutStore = useLayoutStore();
 const gameStore = useGameStore();
 
+const { currentScreenComponentName } = storeToRefs(gameStore);
 const players = generateFakePlayers();
 
 for (const player of players) {

@@ -1,14 +1,40 @@
 import { defineStore } from 'pinia';
 import useState from '@/code/global/use-state';
 import { IPlayer } from '@/core/player-types';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { ApplicationError } from '@/code/errors/application-error';
-import { ICurrentGameProcessData } from '@/core/game/game-service';
+import { ICurrentGameProcessData, ScreenRoundComponentName } from '@/core/game/game-service';
+import { UnexpectedComponentStateError } from '@/code/errors/component-state-error';
 
 const GAME_STORE_NAME = 'game';
 
+const getComponentNameByGameProcess = (data: ICurrentGameProcessData): ScreenRoundComponentName => {
+  const { status } = data;
+
+  switch (status) {
+    case 'players-representation':
+      return 'ScreenPlayersRepresentation'
+    case 'players-voted-ban':
+      return 'ScreenVotingPlayersBan';
+    case 'waiting-players':
+      return 'ScreenWaitingPlayers';
+    case 'final-round':
+      return 'ScreenFinalRound';
+    case 'host-question':
+    case 'player-answer':
+      return 'ScreenQuestionsRound'
+    default:
+      throw new UnexpectedComponentStateError('status')
+  }
+};
+
 const useGameStore = defineStore(GAME_STORE_NAME, () => {
-  const [currentGameProcessData, setCurrentGameProcessData] = useState<ICurrentGameProcessData | null>(null)
+  const [currentGameProcessData, setCurrentGameProcessData] = useState<ICurrentGameProcessData>({
+    status: 'waiting-players',
+    players: [],
+  })
+
+  const currentScreenComponentName = computed(() => getComponentNameByGameProcess(currentGameProcessData.value));
 
   // Сколько всего заработано в игре (за все раунды)
   const [currentTotalBankScore, setCurrentTotalBankScore] = useState(0)
@@ -40,6 +66,7 @@ const useGameStore = defineStore(GAME_STORE_NAME, () => {
   }
 
   return {
+    currentScreenComponentName,
     currentGameProcessData,
     setCurrentGameProcessData,
     clearPlayers,

@@ -2,7 +2,7 @@ import { Disposable } from '@/base/lifecycle';
 import { IPlayer } from '@/core/player-types';
 
 export type CurrentGameStatus =
-  'created'
+  'waiting-players'
   | 'paused'
   | 'players-representation'
   | 'players-voted-ban'
@@ -12,6 +12,13 @@ export type CurrentGameStatus =
   | 'pre-final-round'
   | 'final-round'
 
+export type ScreenRoundComponentName =
+  'ScreenPauseRound' |
+  'ScreenWaitingPlayers' |
+  'ScreenPlayersRepresentation' |
+  'ScreenQuestionsRound' |
+  'ScreenVotingPlayersBan' |
+  'ScreenFinalRound'
 
 export interface ICurrentGameProcessData {
   status: CurrentGameStatus;

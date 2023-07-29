@@ -10,10 +10,21 @@ import useMiddleware from '@/routes/middleware';
 
 import ChooseRolePopupView from '@/components/popups/ChooseRolePopupView.vue';
 import EnterGamePopupView from '@/components/popups/EnterGamePopupView.vue';
+import ScreenFinalRound from '@/components/screens/ScreenFinalRound.vue';
+import ScreenPlayersRepresentation from '@/components/screens/ScreenPlayersRepresentation.vue';
+import ScreenQuestionsRound from '@/components/screens/ScreenQuestionsRound.vue';
+import ScreenVotingPlayersBan from '@/components/screens/ScreenVotingPlayersBan.vue';
+import ScreenWaitingPlayers from '@/components/screens/ScreenWaitingPlayers.vue';
 
 function main() {
   const { getLocalStorageValue } = useLocalStorage();
   const app = createApp(App);
+
+  app.component('ScreenFinalRound', ScreenFinalRound);
+  app.component('ScreenPlayersRepresentation', ScreenPlayersRepresentation);
+  app.component('ScreenQuestionsRound', ScreenQuestionsRound);
+  app.component('ScreenVotingPlayersBan', ScreenVotingPlayersBan);
+  app.component('ScreenWaitingPlayers', ScreenWaitingPlayers);
 
   app.component('ChooseRolePopupView', ChooseRolePopupView);
   app.component('EnterGamePopupView', EnterGamePopupView);
