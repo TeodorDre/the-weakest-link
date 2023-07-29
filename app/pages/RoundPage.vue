@@ -4,7 +4,7 @@
     <div :class="$style.roundMain">
       <player-list-view></player-list-view>
     </div>
-    <current-round-timer-view :class="$style.roundTimer" />
+    <player-actions-sidebar-view />
   </div>
 </template>
 
@@ -18,6 +18,7 @@ import { LocalStorageKey } from '@/code/local-storage/local-storage';
 import useGameStore from '@/code/store/game-store';
 import generateFakePlayers from '@/core/helpers/generate-fake-players';
 import CurrentRoundTimerView from '@/components/round/CurrentRoundTimerView.vue';
+import PlayerActionsSidebarView from '@/components/round/PlayerActionsSidebarView.vue';
 
 const layoutStore = useLayoutStore();
 const gameStore = useGameStore();
@@ -51,13 +52,8 @@ onBeforeMount(() => {
 
 .roundMain {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   justify-content: flex-end;
-}
-
-.roundTimer {
-  align-self: flex-end;
-  padding-right: 10px;
-  margin-bottom: 20px;
 }
 </style>

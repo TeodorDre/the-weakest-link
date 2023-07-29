@@ -7,7 +7,6 @@ import { computed, ref } from 'vue';
 import { formatTime } from '@/base/date';
 import { translate } from '@/code/localization/translate';
 import AppButton from '@/components/ui/AppButton.vue';
-import { roundService } from '@/services';
 import { GameRulesConstants } from '@/core/helpers/game';
 
 const FIRST_ROUND_TIME = GameRulesConstants.FirstRoundTimeSeconds;
@@ -41,14 +40,6 @@ const displayedTimer = computed(() => {
   }
 
   return formatTime(roundTimeout.value);
-});
-
-roundService.on('next-round', (round) => {
-  const offsetRound = round * 10;
-
-  window.clearTimeout(timeoutId);
-
-  runRound(offsetRound);
 });
 </script>
 

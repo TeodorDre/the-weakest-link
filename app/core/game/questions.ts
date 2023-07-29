@@ -4,5 +4,8 @@ export enum GameQuestionType {
 }
 
 export interface IGameSimpleQuestion {
-
+  question_type: GameQuestionType;
+  question_text: string;
+  question_answer: string;
+  question_answer_variants: string[];
 }

@@ -1,6 +1,7 @@
 <template>
   <section :class="$style.admin">
     <app-button :text="$t('hostAction.pause')" />
+    <app-button :text="$t('hostAction.play')"/>
   </section>
 </template>
 

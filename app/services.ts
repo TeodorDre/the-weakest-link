@@ -1,4 +1,4 @@
-import AudioService from '@/core/game/audio-service';
+import AudioService from '@/core/audio-service';
 
 const audioService = new AudioService();
 

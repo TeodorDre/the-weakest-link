@@ -2,22 +2,22 @@
   {
     "question_type": "opened",
     "question_text": "Какой сейчас год?",
-    "question_exact_answer": "2023"
+    "question_answer": "2023"
   },
   {
     "question_type": "opened",
     "question_text": "В каком году началась Великая отечественная война?",
-    "question_exact_answer": "1941"
+    "question_answer": "1941"
   },
   {
     "question_type": "opened",
     "question_text": "Какой полюс холоднее? Северный или южный?",
-    "question_exact_answer": "Северный"
+    "question_answer": "Северный"
   },
   {
     "question_type": "closed",
     "question_text": "В каком году было крещение Руси?",
-    "question_variants": [
+    "question_answer_variants": [
       "988",
       "998",
       "1000"
