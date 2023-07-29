@@ -5,6 +5,14 @@
       :text="isPaused ? 'Продолжить' : 'Пауза'"
     />
     <app-button
+      @click="startRound()"
+      text="Начать раунд"
+    />
+    <app-button
+      @click="endRound()"
+      text="Закончить раунд"
+    />
+    <app-button
       @click="startPlayersVotingForBan()"
       text="Голосование на вылет"
     />
@@ -17,12 +25,20 @@
       text="Прощание с игроком"
     />
     <app-button
-      @click="startRound()"
-      text="Начать раунд"
+      @click="startPrefinalRound()"
+      text="Начать пред.фин. раунд"
     />
     <app-button
-      @click="endRound()"
-      text="Закончить раунд"
+      @click="startFinalRound()"
+      text="Начать фин.раунд"
+    />
+    <app-button
+      @click="endFinalRound()"
+      text="Закончить фин. раунд"
+    />
+    <app-button
+      @click="playerWon()"
+      text="Победа"
     />
   </section>
 </template>
@@ -43,10 +59,10 @@ const {
   endRound,
   pauseRound,
   resumeRound,
-  removePlayer,
-  addPlayer,
-  addMoneyToBank,
-  removeMoneyFromBank,
+  startPrefinalRound,
+  playerWon,
+  startFinalRound,
+  endFinalRound,
   goodbyePlayer,
 } = useHostAdminActions();
 
@@ -59,7 +75,7 @@ const {
   bottom: 40px;
   right: 40px;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
 }
 </style>
