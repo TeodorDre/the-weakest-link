@@ -19,8 +19,7 @@ const getComponentNameByGameProcess = (data: ICurrentGameProcessData): ScreenRou
       return 'ScreenWaitingPlayers';
     case 'final-round':
       return 'ScreenFinalRound';
-    case 'host-question':
-    case 'player-answer':
+    case 'round':
       return 'ScreenQuestionsRound'
   }
 };
@@ -28,11 +27,12 @@ const getComponentNameByGameProcess = (data: ICurrentGameProcessData): ScreenRou
 const useGameStore = defineStore(GAME_STORE_NAME, () => {
   const [gameState, setGameState] = useState<ICurrentGameProcessData>({
     status: 'waiting-players',
+    paused: false,
   });
 
   const gameStatus = computed(() => gameState.value.status);
 
-  const isPaused = computed(() => gameState.value.status === 'paused');
+  const isPaused = computed(() => gameState.value.paused);
 
   const currentScreenComponentName = computed(() => getComponentNameByGameProcess(gameState.value));
 

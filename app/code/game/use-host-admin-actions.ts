@@ -39,15 +39,11 @@ export default function useHostAdminActions() {
   };
 
   const pauseRound = () => {
-    gameStore.setGameState({ status: 'paused' });
-
-    gameService.emitter.emit('pause');
-    audioService.play('mainLoopBackground');
+    gameService.pauseGame();
   };
 
   const resumeRound = () => {
-    gameService.emitter.emit('resume');
-    gameStore.setGameState({ status: 'waiting-players' });
+    gameService.resumeRound();
   };
 
   const startRound = () => {

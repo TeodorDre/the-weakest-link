@@ -18,16 +18,15 @@ import PlayerListView from '@/components/players/PlayerListView.vue';
 import useGameStore from '@/code/store/game-store';
 import PlayerActionsSidebarView from '@/components/round/PlayerActionsSidebarView.vue';
 import { storeToRefs } from 'pinia';
-import { GameService } from '@/core/game/game-service';
 import { provide } from 'vue';
 import useLayoutStore from '@/code/store/layout-store';
 import AdminControlPanel from '@/components/AdminControlPanel.vue';
+import { gameService } from '@/services';
 
 const gameStore = useGameStore();
 const layoutStore = useLayoutStore();
 
 const { currentScreenComponentName } = storeToRefs(gameStore);
-const gameService = new GameService();
 
 gameService.emitter.on('pause', () => {
   layoutStore.setPopupName('RoundPausePopup');

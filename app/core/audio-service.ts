@@ -154,5 +154,11 @@ export default class AudioService {
   private async start() {
     this.audioController.mainLoopBackground.play({ loop: true });
     this.currentAudio = this.audioController.mainLoopBackground;
+
+    this.registerListeners();
+  }
+
+  private registerListeners() {
+
   }
 }
