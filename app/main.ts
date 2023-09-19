@@ -16,6 +16,8 @@ import ScreenQuestionsRound from '@/components/screens/ScreenQuestionsRound.vue'
 import ScreenVotingPlayersBan from '@/components/screens/ScreenVotingPlayersBan.vue';
 import ScreenWaitingPlayers from '@/components/screens/ScreenWaitingPlayers.vue';
 import RoundPausePopup from '@/components/popups/RoundPausePopup.vue';
+import { lifecycleService } from '@/services';
+import { LifePhase } from '@/code/lifecycle/lifecycle-service';
 
 function main() {
   const { getLocalStorageValue } = useLocalStorage();
@@ -46,6 +48,8 @@ function main() {
   }
 
   app.mount('#app');
+
+  lifecycleService.phase = LifePhase.Ready;
 }
 
 main();

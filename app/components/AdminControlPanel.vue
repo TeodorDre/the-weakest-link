@@ -72,10 +72,12 @@ const {
 <style module lang="scss">
 .admin {
   position: absolute;
-  bottom: 40px;
-  right: 40px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  top: 20px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 10px;
   gap: 5px;
 }
 </style>

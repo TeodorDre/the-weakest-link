@@ -2,6 +2,13 @@ import { Disposable } from '@/base/lifecycle';
 import useGameStore from '@/code/store/game-store';
 import { EventEmitter } from '@/base/event-emitter';
 import { audioService } from '@/services';
+import { LifecycleService, LifePhase } from '@/code/lifecycle/lifecycle-service';
+import { isDev } from '@/base/dom';
+
+import mockPlayers from '@/mocks/mock_players.json';
+import { IPlayer } from '@/core/player-types';
+import gameStore from '@/code/store/game-store';
+import { timeout } from '@/base/async';
 
 export type CurrentGameStatus =
   'waiting-players'
@@ -24,19 +31,24 @@ export interface ICurrentGameProcessData {
 }
 
 interface GameEventMap {
-  'pause': void;
-  'resume': void;
-  'money-bank-added': void;
-  'money-bank-list': void;
+  'player-connected': IPlayer;
+  'player-disconnected': IPlayer;
+  'pause': undefined;
+  'resume': undefined;
+  'money-bank-added': undefined;
+  'money-bank-list': undefined;
 }
 
 export class GameService extends Disposable {
   public readonly emitter: EventEmitter<GameEventMap> = new EventEmitter<GameEventMap>();
 
-  constructor() {
+  constructor(
+    private readonly lifecycleService: LifecycleService,
+  ) {
     super();
-
-    this.registerListeners();
+    this.lifecycleService.when(LifePhase.Ready).then(() => {
+      this.registerListeners();
+    })
   }
 
   public resumeRound() {
@@ -57,7 +69,44 @@ export class GameService extends Disposable {
     this.emitter.emit('pause');
   }
 
+  public onPlayerConnected(player: IPlayer) {
+    const gameStore = useGameStore();
+    gameStore.addPlayer(player);
+
+    this.emitter.emit('player-connected', player);
+  }
+
+  public onPlayerDisconnected(player: IPlayer) {
+    const gameStore = useGameStore();
+    gameStore.removePlayer(player);
+
+    this.emitter.emit('player-disconnected', player);
+  }
+
+  private async setupTestData() {
+    const timeouts = [
+      timeout(500),
+      timeout(1000),
+      timeout(1500),
+      timeout(2000),
+      timeout(2500),
+    ]
+
+    let index = 0;
+
+    for await (const d of timeouts.values()) {
+      const player = mockPlayers[index];
+
+      this.onPlayerConnected(player);
+      index++;
+    }
+  }
+
   private registerListeners() {
     const gameStore = useGameStore();
+
+    if (isDev) {
+      this.setupTestData();
+    }
   }
 }

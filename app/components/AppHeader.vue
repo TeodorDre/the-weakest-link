@@ -20,17 +20,29 @@ import { AppRoute } from '@/routes';
 import { translate } from '@/code/localization/translate';
 import IconVolume from '@/components/icons/IconVolume.vue';
 import AppSlotButton from '@/components/ui/AppSlotButton.vue';
+import { storeToRefs } from 'pinia';
+import useSessionStore from '@/code/store/session-store';
+import { computed } from 'vue';
 
-const links = [
-  {
-    routeName: AppRoute.HomePage,
-    text: translate('nav.home')
-  },
-  {
-    routeName: AppRoute.ProfilePage,
-    text: translate('nav.profile')
+const { isAuth } = storeToRefs(useSessionStore());
+
+const links = computed(() => {
+  const links = [
+    {
+      routeName: AppRoute.HomePage,
+      text: translate('nav.home')
+    }
+  ]
+
+  if (isAuth.value) {
+    links.push({
+      routeName: AppRoute.ProfilePage,
+      text: translate('nav.profile')
+    })
   }
-]
+
+  return links;
+})
 </script>
 
 <style lang="scss" module>

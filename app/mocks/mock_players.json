@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Таня",
+    "id": "tanya",
+    "role": 2
+  },
+  {
+    "name": "Вика",
+    "id": "vika",
+    "role": 2
+  },
+  {
+    "name": "Андрей",
+    "id": "Andrey",
+    "role": 2
+  },
+  {
+    "name": "Наташа",
+    "id": "Natasha",
+    "role": 2
+  },
+  {
+    "name": "Пикуль",
+    "id": "pikul",
+    "role": 2
+  }
+]

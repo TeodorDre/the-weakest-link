@@ -1,10 +1,10 @@
 <template>
-  <section :class="$style.registration">
+  <form :class="$style.registration" @submit="register">
     <h1>{{ $t('home.makeRegistration') }}</h1>
     <app-input :placeholder="$t('common.login')" v-model:input="login"></app-input>
     <app-input :placeholder="$t('common.password')" v-model:input="password"></app-input>
     <app-button :text="$t('session.register')" static-animation @click="register()"></app-button>
-  </section>
+  </form>
 </template>
 
 <script lang="ts" setup>

@@ -48,3 +48,60 @@ export function timeout(milliseconds: number): Promise<void> {
     window.setTimeout(resolve, milliseconds);
   });
 }
+
+export class Barrier {
+  private _isOpen: boolean;
+  private readonly _promise: Promise<boolean>;
+  private _completePromise!: (v: boolean) => void;
+
+  /**
+   * @author Teodor_Dre <swen295@gmail.com>
+   *
+   * @description
+   *  Create barrier for code.
+   *  It create promise that you can resolve in any time you want. (By calling open method).
+   */
+  constructor() {
+    this._isOpen = false;
+    this._promise = new Promise<boolean>(c => {
+      this._completePromise = c;
+    });
+  }
+
+  /**
+   * @author Teodor_Dre <swen295@gmail.com>
+   *
+   * @description
+   *  Flag that means does it barrier already open.
+   *
+   *  @return boolean
+   */
+  public isOpen(): boolean {
+    return this._isOpen;
+  }
+
+  /**
+   * @author Teodor_Dre <swen295@gmail.com>
+   *
+   * @description
+   *  Open barrier, or say in another words resolve promise inside barrier.
+   *
+   *  @return void
+   */
+  public open(): void {
+    this._isOpen = true;
+    this._completePromise(true);
+  }
+
+  /**
+   * @author Teodor_Dre <swen295@gmail.com>
+   *
+   * @description
+   *  Get promise barrier.
+   *
+   *  @return Promise<boolean>
+   */
+  public wait(): Promise<boolean> {
+    return this._promise;
+  }
+}

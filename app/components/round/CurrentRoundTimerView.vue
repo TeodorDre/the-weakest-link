@@ -30,6 +30,7 @@ let timeoutId: number | undefined;
 const onButtonClick = () => {
   gameStore.setGameState({
     status: 'host-question',
+    paused: false,
   });
 };
 
@@ -39,14 +40,6 @@ const isButtonDisabled = computed(() => {
   }
 
   return false;
-});
-
-onMounted(() => {
-  window.setTimeout(() => {
-    gameStore.setGameState({
-      status: 'players-representation'
-    });
-  }, 5000);
 });
 
 const roundTick = () => {

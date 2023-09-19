@@ -1,6 +1,7 @@
 <template>
   <div :class="$style.layout">
     <app-header />
+    <app-notification />
     <main :class="$style.root">
       <router-view :class="$style.routerView"></router-view>
     </main>
@@ -16,6 +17,7 @@ import AppPopupView from '@/components/AppPopupView.vue';
 import { storeToRefs } from 'pinia';
 import useLayoutStore from '@/code/store/layout-store';
 import { audioService } from '@/services';
+import AppNotification from '@/components/AppNotification.vue';
 
 const { popupName } = storeToRefs(useLayoutStore());
 

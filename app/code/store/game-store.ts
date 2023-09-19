@@ -4,6 +4,7 @@ import { IPlayer } from '@/core/player-types';
 import { computed, ref } from 'vue';
 import { ApplicationError } from '@/code/errors/application-error';
 import { ICurrentGameProcessData, ScreenRoundComponentName } from '@/core/game/game-service';
+import { IGameSettings } from '@/core/game-types';
 
 const GAME_STORE_NAME = 'game';
 
@@ -30,6 +31,8 @@ const useGameStore = defineStore(GAME_STORE_NAME, () => {
     paused: false,
   });
 
+  const [lobbySettings, setLobbySettings] = useState<IGameSettings>({ lobbyName: '', playersLobbyCount: 0 });
+
   const gameStatus = computed(() => gameState.value.status);
 
   const isPaused = computed(() => gameState.value.paused);
@@ -51,7 +54,7 @@ const useGameStore = defineStore(GAME_STORE_NAME, () => {
     players.value.push(player);
   };
 
-  const deletePlayer = (player: IPlayer) => {
+  const removePlayer = (player: IPlayer) => {
     const playerIndex = players.value.findIndex((plr) => plr.id === player.id);
 
     if (playerIndex === -1) {
@@ -66,6 +69,8 @@ const useGameStore = defineStore(GAME_STORE_NAME, () => {
   }
 
   return {
+    lobbySettings,
+    setLobbySettings,
     isPaused,
     gameStatus,
     currentScreenComponentName,
@@ -74,7 +79,7 @@ const useGameStore = defineStore(GAME_STORE_NAME, () => {
     clearPlayers,
     players,
     addPlayer,
-    deletePlayer,
+    removePlayer,
     currentRoundPlayer,
     setCurrentRoundPlayer,
     currentRoundScore,

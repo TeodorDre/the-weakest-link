@@ -18,6 +18,8 @@ export const isFirefox = /Firefox|FxiOS/i.test(USER_AGENT);
 export const isChrome = isClient ? 'chrome' in window : false;
 export const isDesktop = !isMobile;
 
+export const isDev = Boolean(process.env.IS_DEV);
+
 export const isSafari = Boolean(
   isClient ?
     window.navigator.vendor &&

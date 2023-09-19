@@ -10,8 +10,10 @@ import CurrentRoundTimerView from '@/components/round/CurrentRoundTimerView.vue'
 
 <style module lang="scss">
 .playerActions {
-  padding-right: 20px;
-  padding-top: 20px;
+  position: absolute;
+  top: 20px;
+  right: 250px;
+  padding: 10px;
 }
 
 .roundTimer {
