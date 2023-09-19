@@ -7,7 +7,6 @@ import { isDev } from '@/base/dom';
 
 import mockPlayers from '@/mocks/mock_players.json';
 import { IPlayer } from '@/core/player-types';
-import gameStore from '@/code/store/game-store';
 import { timeout } from '@/base/async';
 
 export type CurrentGameStatus =
@@ -33,6 +32,7 @@ export interface ICurrentGameProcessData {
 interface GameEventMap {
   'player-connected': IPlayer;
   'player-disconnected': IPlayer;
+  'all-players-connected': undefined;
   'pause': undefined;
   'resume': undefined;
   'money-bank-added': undefined;
@@ -46,9 +46,8 @@ export class GameService extends Disposable {
     private readonly lifecycleService: LifecycleService,
   ) {
     super();
-    this.lifecycleService.when(LifePhase.Ready).then(() => {
-      this.registerListeners();
-    })
+
+    this.lifecycleService.when(LifePhase.Ready).then(() => this.registerListeners())
   }
 
   public resumeRound() {
@@ -100,6 +99,8 @@ export class GameService extends Disposable {
       this.onPlayerConnected(player);
       index++;
     }
+
+    this.emitter.emit('all-players-connected');
   }
 
   private registerListeners() {
@@ -108,5 +109,36 @@ export class GameService extends Disposable {
     if (isDev) {
       this.setupTestData();
     }
+
+    const onAllPlayersConnected = () => {
+      gameStore.setGameState({
+        paused: false,
+        status: 'players-representation',
+      });
+
+      runPlayersPresentation();
+    };
+
+    const runPlayersPresentation = async () => {
+      const timeouts = [
+        timeout(500),
+        timeout(1000),
+        timeout(1500),
+        timeout(2000),
+        timeout(2500),
+      ]
+
+      let index = 0;
+
+      for await (const d of timeouts.values()) {
+        const player = mockPlayers[index];
+
+        console.info('Привет игрок ' + player.name);
+
+        index++;
+      }
+    };
+
+    this.emitter.on('all-players-connected', onAllPlayersConnected);
   }
 }

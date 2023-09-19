@@ -9,6 +9,10 @@
         {{ text }}
       </router-link>
     </nav>
+    <div v-if="isLobbyPage" :class="$style.lobby">
+      <p> Lobby: {{ lobbyName }} </p>
+      <p> Players: {{ playersConnected }} / {{ lobbyPlayersCount }} </p>
+    </div>
     <app-slot-button>
       <icon-volume mode="off" />
     </app-slot-button>
@@ -23,8 +27,16 @@ import AppSlotButton from '@/components/ui/AppSlotButton.vue';
 import { storeToRefs } from 'pinia';
 import useSessionStore from '@/code/store/session-store';
 import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+import useGameStore from '@/code/store/game-store';
 
 const { isAuth } = storeToRefs(useSessionStore());
+const route = useRoute();
+const gameStore = useGameStore();
+
+const { lobbyName, lobbyPlayersCount, playersConnected } = storeToRefs(gameStore);
+
+const isLobbyPage = computed(() => route.name === AppRoute.RoundPage);
 
 const links = computed(() => {
   const links = [
@@ -53,6 +65,11 @@ const links = computed(() => {
   min-height: var(--g-header-height);
   background-color: var(--c-primary-color-15);
   border-bottom: 1px solid var(--c-accent-color);
+}
+
+.lobby {
+  display: flex;
+  gap: 10px;
 }
 
 .nav {

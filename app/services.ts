@@ -1,5 +1,5 @@
 import AudioService from '@/core/audio-service';
-import { GameService } from '@/core/game/game-service';
+import { GameService } from '@/core/game-service';
 import { LifecycleService } from '@/code/lifecycle/lifecycle-service';
 
 const lifecycleService = new LifecycleService();

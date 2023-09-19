@@ -13,7 +13,7 @@ import { computed, onMounted, ref } from 'vue';
 import { formatTime } from '@/base/date';
 import { translate } from '@/code/localization/translate';
 import AppButton from '@/components/ui/AppButton.vue';
-import { GameRulesConstants } from '@/core/helpers/game';
+import { GameRulesConstants } from '@/core/game';
 import { storeToRefs } from 'pinia';
 import useGameStore from '@/code/store/game-store';
 

@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts" setup>
-import { GameRulesConstants } from '@/core/helpers/game';
+import { GameRulesConstants } from '@/core/game';
 import RoundBankValueButton from '@/components/round/RoundBankValueButton.vue';
 import { storeToRefs } from 'pinia';
 import useGameStore from '@/code/store/game-store';

@@ -41,12 +41,15 @@ import { parseJsonFile } from '@/base/dom';
 import { nanoid } from 'nanoid';
 import { useRouter } from 'vue-router';
 import { AppRoute } from '@/routes';
+import useGameStore from '@/code/store/game-store';
 
 const router = useRouter();
 
 const password = ref('');
 const lobbyName = ref('');
-const playersCount = ref('');
+const playersCount = ref('5');
+
+const gameStore = useGameStore();
 
 const onFileChange = async (event: any) => {
   try {
@@ -58,6 +61,11 @@ const onFileChange = async (event: any) => {
 
 const createGame = () => {
   const id = nanoid(2);
+
+  gameStore.setLobbySettings({
+    lobbyName: lobbyName.value,
+    playersLobbyCount: Number(playersCount.value),
+  })
 
   router.push({
     name: AppRoute.RoundPage,

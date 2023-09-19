@@ -1,4 +1,4 @@
-import { GameRulesConstants } from '@/core/helpers/game';
+import { GameRulesConstants } from '@/core/game';
 import { IPlayer, PlayerRole } from '@/core/player-types';
 import { nanoid } from 'nanoid';
 import { getRandomElement } from '@/base/array';

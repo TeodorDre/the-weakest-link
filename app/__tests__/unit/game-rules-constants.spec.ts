@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import generateFakePlayers from '@/core/helpers/generate-fake-players';
-import { GameRulesFunctions } from '@/core/helpers/game';
+import generateFakePlayers from '@/core/generate-fake-players';
+import { GameRulesFunctions } from '@/core/game';
 
 describe('@core/games-rules-constants', () => {
   it('getFirstRoundPlayerByName', () => {
