@@ -28,10 +28,6 @@ const roundTimeout = ref(0);
 let timeoutId: number | undefined;
 
 const onButtonClick = () => {
-  gameStore.setGameState({
-    status: 'host-question',
-    paused: false,
-  });
 };
 
 const isButtonDisabled = computed(() => {

@@ -28,8 +28,9 @@ const getComponentNameByGameProcess = (data: ICurrentGameProcessData): ScreenRou
 const useGameStore = defineStore(GAME_STORE_NAME, () => {
   const [gameState, setGameState] = useState<ICurrentGameProcessData>({
     status: 'waiting-players',
-    paused: false,
   });
+
+  const [isPaused, setIsPaused] = useState(false);
 
   const [lobbySettings, setLobbySettings] = useState<IGameSettings>({ lobbyName: 'TEST LOBBY', playersLobbyCount: 5 });
 
@@ -37,7 +38,6 @@ const useGameStore = defineStore(GAME_STORE_NAME, () => {
   const lobbyPlayersCount = computed(() => lobbySettings.value.playersLobbyCount);
 
   const gameStatus = computed(() => gameState.value.status);
-  const isPaused = computed(() => gameState.value.paused);
 
   const currentScreenComponentName = computed(() => getComponentNameByGameProcess(gameState.value));
 
@@ -69,9 +69,10 @@ const useGameStore = defineStore(GAME_STORE_NAME, () => {
   const playersConnected = computed(() => players.value.length);
 
   return {
+    isPaused,
+    setIsPaused,
     lobbySettings,
     setLobbySettings,
-    isPaused,
     gameStatus,
     currentScreenComponentName,
     gameState,

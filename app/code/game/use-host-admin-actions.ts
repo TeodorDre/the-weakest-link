@@ -1,9 +1,6 @@
-import useSafeGameService from '@/code/game/use-safe-game-service';
-import { audioService } from '@/services';
+import { audioService, gameService } from '@/services';
 
 export default function useHostAdminActions() {
-  const gameService = useSafeGameService();
-
   const startFinalRound = () => {
     audioService.play('finalRoundStart')
 

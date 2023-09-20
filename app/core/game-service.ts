@@ -3,13 +3,14 @@ import useGameStore from '@/code/store/game-store';
 import { EventEmitter } from '@/base/event-emitter';
 import { audioService } from '@/services';
 import { LifecycleService, LifePhase } from '@/code/lifecycle/lifecycle-service';
-import { isDev } from '@/base/dom';
 
 import mockPlayers from '@/mocks/mock_players.json';
 import { IPlayer } from '@/core/player-types';
 import { timeout } from '@/base/async';
 import useLayoutStore from '@/code/store/layout-store';
 import { NotificationLevel } from '@/code/notification/notification';
+import { IRoundData } from '@/core/round';
+import useHostAdminActions from '@/code/game/use-host-admin-actions';
 
 export type CurrentGameStatus =
   'waiting-players'
@@ -28,7 +29,6 @@ export type ScreenRoundComponentName =
 
 export interface ICurrentGameProcessData {
   status: CurrentGameStatus;
-  paused: boolean;
 }
 
 interface GameEventMap {
@@ -36,7 +36,8 @@ interface GameEventMap {
   'player-disconnected': IPlayer;
   'all-players-connected': undefined;
   'game-started': undefined;
-  'round-started': undefined;
+  'round-started': IRoundData;
+  'round-ended': IRoundData;
   'pause': undefined;
   'resume': undefined;
   'money-bank-added': undefined;
@@ -57,7 +58,7 @@ export class GameService extends Disposable {
   public resumeRound() {
     const gameStore = useGameStore();
 
-    gameStore.setGameState({ paused: false, status: gameStore.gameStatus });
+    gameStore.setGameState({ status: gameStore.gameStatus });
     audioService.play('mainLoopBackground');
 
     this.emitter.emit('resume');
@@ -66,10 +67,25 @@ export class GameService extends Disposable {
   public pauseGame() {
     const gameStore = useGameStore();
 
-    gameStore.setGameState({ paused: true, status: gameStore.gameStatus });
+    gameStore.setGameState({ status: gameStore.gameStatus });
     audioService.play('mainLoopBackground');
 
     this.emitter.emit('pause');
+  }
+
+  public endRound() {
+    const gameStore = useGameStore();
+    const hostAdminActions = useHostAdminActions();
+
+    this.emitter.emit('round-ended', {
+      roundNumber: 1,
+    });
+
+    hostAdminActions.endRound();
+
+    gameStore.setGameState({
+      status: 'players-voted-ban',
+    })
   }
 
   public onPlayerConnected(player: IPlayer) {
@@ -120,7 +136,6 @@ export class GameService extends Disposable {
 
     const onAllPlayersConnected = () => {
       gameStore.setGameState({
-        paused: false,
         status: 'players-representation',
       });
 
@@ -141,7 +156,10 @@ export class GameService extends Disposable {
       for await (const d of timeouts.values()) {
         const player = mockPlayers[index];
 
-        console.info('Привет игрок ' + player.name);
+        layoutStore.addNotification({
+          level: NotificationLevel.Info,
+          message: 'Привет игрок ' + player.name
+        })
 
         index++;
       }
@@ -153,16 +171,23 @@ export class GameService extends Disposable {
       layoutStore.addNotification({
         level: NotificationLevel.Success,
         message: 'Игра начнется, через несколько секунд',
-        hideTimeoutMs: 4000,
+        hideTimeoutMs: 3000,
       })
 
-      await timeout(5000);
+      await timeout(3000);
 
-      this.emitter.emit('round-started');
+      this.emitter.emit('round-started', { roundNumber: 1 });
     };
 
-    const onRoundStarted = () => {
+    const onRoundStarted = (event: IRoundData) => {
+      gameStore.setGameState({
+        status: 'round',
+      })
 
+      layoutStore.addNotification({
+        level: NotificationLevel.Info,
+        message: `Раунд ${event.roundNumber} начался`
+      })
     };
 
     this.emitter.on('round-started', onRoundStarted);
