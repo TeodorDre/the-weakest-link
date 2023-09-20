@@ -22,6 +22,7 @@ import { provide } from 'vue';
 import useLayoutStore from '@/code/store/layout-store';
 import AdminControlPanel from '@/components/AdminControlPanel.vue';
 import { gameService } from '@/services';
+import useSafeGameService from '@/code/game/use-safe-game-service';
 
 const gameStore = useGameStore();
 const layoutStore = useLayoutStore();
@@ -35,6 +36,8 @@ gameService.emitter.on('pause', () => {
 gameService.emitter.on('resume', () => {
   layoutStore.setPopupName(null);
 });
+
+gameService.startTestGame();
 
 provide('gameService', gameService);
 </script>

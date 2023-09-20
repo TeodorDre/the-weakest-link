@@ -1,7 +1,9 @@
 <template>
   <div :class="$style.layout">
     <app-header />
-    <app-notification />
+    <transition name="fade">
+      <app-notification v-if="currentNotification" />
+    </transition>
     <main :class="$style.root">
       <router-view :class="$style.routerView"></router-view>
     </main>
@@ -19,7 +21,7 @@ import useLayoutStore from '@/code/store/layout-store';
 import { audioService } from '@/services';
 import AppNotification from '@/components/AppNotification.vue';
 
-const { popupName } = storeToRefs(useLayoutStore());
+const { popupName, currentNotification } = storeToRefs(useLayoutStore());
 
 audioService.init();
 </script>

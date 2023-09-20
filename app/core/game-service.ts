@@ -8,6 +8,8 @@ import { isDev } from '@/base/dom';
 import mockPlayers from '@/mocks/mock_players.json';
 import { IPlayer } from '@/core/player-types';
 import { timeout } from '@/base/async';
+import useLayoutStore from '@/code/store/layout-store';
+import { NotificationLevel } from '@/code/notification/notification';
 
 export type CurrentGameStatus =
   'waiting-players'
@@ -33,6 +35,8 @@ interface GameEventMap {
   'player-connected': IPlayer;
   'player-disconnected': IPlayer;
   'all-players-connected': undefined;
+  'game-started': undefined;
+  'round-started': undefined;
   'pause': undefined;
   'resume': undefined;
   'money-bank-added': undefined;
@@ -70,6 +74,13 @@ export class GameService extends Disposable {
 
   public onPlayerConnected(player: IPlayer) {
     const gameStore = useGameStore();
+    const layoutStore = useLayoutStore();
+
+    layoutStore.addNotification({
+      level: NotificationLevel.Info,
+      message: `Игрок ${player.name} подключился к игре`
+    })
+
     gameStore.addPlayer(player);
 
     this.emitter.emit('player-connected', player);
@@ -82,7 +93,7 @@ export class GameService extends Disposable {
     this.emitter.emit('player-disconnected', player);
   }
 
-  private async setupTestData() {
+  public async startTestGame() {
     const timeouts = [
       timeout(500),
       timeout(1000),
@@ -105,10 +116,7 @@ export class GameService extends Disposable {
 
   private registerListeners() {
     const gameStore = useGameStore();
-
-    if (isDev) {
-      this.setupTestData();
-    }
+    const layoutStore = useLayoutStore();
 
     const onAllPlayersConnected = () => {
       gameStore.setGameState({
@@ -137,8 +145,28 @@ export class GameService extends Disposable {
 
         index++;
       }
+
+      this.emitter.emit('game-started');
     };
 
+    const onGameStarted = async () => {
+      layoutStore.addNotification({
+        level: NotificationLevel.Success,
+        message: 'Игра начнется, через несколько секунд',
+        hideTimeoutMs: 4000,
+      })
+
+      await timeout(5000);
+
+      this.emitter.emit('round-started');
+    };
+
+    const onRoundStarted = () => {
+
+    };
+
+    this.emitter.on('round-started', onRoundStarted);
+    this.emitter.on('game-started', onGameStarted);
     this.emitter.on('all-players-connected', onAllPlayersConnected);
   }
 }
